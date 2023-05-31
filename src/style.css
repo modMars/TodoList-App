@@ -38,7 +38,7 @@ body {
   min-width: 10rem;
   background-color: brown;
   display: grid;
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -48,10 +48,12 @@ body {
   resize: none;
 }
 
-.disabled {
+#disabled {
   opacity: 0;
+  pointer-events: none;
+  user-select: none;
 }
 
-.enabled {
+#enabled {
   opacity: 1;
 }
