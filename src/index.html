@@ -13,7 +13,7 @@
           <h1>To-do</h1>
         </nav>
       </header>
-      <aside class="project-container">
+      <aside class="project-container" id="Inbox">
         <button class="project-container__btn">New project</button>
         <ul class="project-container__list">
           <!-- Projects -->
@@ -26,6 +26,7 @@
       </main>
     </div>
     <form class="to-dos__form" id="disabled">
+      <button type="button" class="to-dos__form-cancel">X</button>
       <label for="title">Title</label>
       <input type="text" name="title" id="title" required />
       <label for="description">Description</label>
@@ -45,6 +46,12 @@
         <option value="High">High</option>
       </select>
       <input type="submit" value="Submit" id="Submit" />
+    </form>
+    <form class="project__form" id="disabled">
+      <button type="button" class="to-dos__form-cancel">X</button>
+      <label for="projectName">Name</label>
+      <input type="text" name="projectName" id="projectName" required />
+      <input type="submit" value="projectSubmit" id="projectSubmit" />
     </form>
   </body>
 </html>

@@ -33,27 +33,67 @@ body {
   background-color: bisque;
 }
 
-.to-dos__form {
+.to-dos__form,
+.project__form {
   max-width: 50rem;
   min-width: 10rem;
-  background-color: brown;
+  background-color: grey;
   display: grid;
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  padding: 10px;
+}
+
+.to-dos__form-cancel {
+  position: absolute;
+  width: 50px;
+  background: transparent;
+  border: none;
+  left: 80%;
+  top: 2%;
 }
 
 #description {
   resize: none;
 }
 
-#disabled {
-  opacity: 0;
-  pointer-events: none;
-  user-select: none;
+#enabled {
+  animation-name: showElement;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
 }
 
-#enabled {
-  opacity: 1;
+@keyframes showElement {
+  0% {
+    visibility: hidden;
+    delay: 500ms;
+    opacity: 0;
+  }
+  100% {
+    visibility: visible;
+    delay: 500ms;
+    opacity: 1;
+  }
+}
+
+/* Bloque de estilo para ocultar */
+#disabled {
+  animation-name: hideElement;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes hideElement {
+  0% {
+    visibility: visible;
+    delay: 500ms;
+    opacity: 1;
+  }
+  100% {
+    visibility: hidden;
+    delay: 500ms;
+    opacity: 0;
+  }
 }
