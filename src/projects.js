@@ -4,7 +4,6 @@ function projectFactory(name) {
   let content = [];
   const pushItem = function (item) {
     content.push(item);
-    console.log(content);
   };
 
   return {
@@ -19,4 +18,5 @@ function projectFactory(name) {
     },
   };
 }
+
 export { projectFactory };
