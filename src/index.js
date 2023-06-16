@@ -5,7 +5,7 @@ import "./normalize.css";
 import "./style.css";
 import { createToDoItem } from "./todos.js";
 
-const projectStorage = [];
-console.log(projectStorage);
+let Inbox = projectFactory("Inbox");
+const projectStorage = [Inbox];
 
 export { projectStorage };
