@@ -11,19 +11,16 @@ const displayManager = (() => {
     }
     projectStorage.forEach((e, i) => {
       const newProjectItem = document.createElement("li");
-      const h3 = document.createElement("h3");
       newProjectItem.setAttribute("class", "project-container__list-item");
       newProjectItem.setAttribute("data-index", i);
-      h3.textContent = e.name;
+      newProjectItem.textContent = e.name;
       newProjectItem.addEventListener("click", () => {
         if (projectContainer.id != e.name) {
           projectContainer.setAttribute("id", e.name);
           refreshTodos();
         }
       });
-      newProjectItem.append(h3);
       projectContainer.append(newProjectItem);
-      eventListenerManager.newProjectEventListener();
     });
   };
 
@@ -35,28 +32,24 @@ const displayManager = (() => {
     const currentProject = domInterface.getCurrentProject().content;
     const projectName = document.createElement("h2");
     const btn = document.createElement("button");
-    const icon = document.createElement("i");
     const wrapper = document.createElement("div");
     wrapper.setAttribute("id", "to-dos__container-wrapper");
     btn.setAttribute("class", "to-dos__container-btn");
-    icon.setAttribute("class", "fa-solid fa-square-plus");
-    btn.append(icon);
+    btn.textContent = "+";
     wrapper.append(projectName, btn);
-    projectName.textContent = document.querySelector(
-      ".project-container__list"
-    ).id;
+    projectName.textContent = `~/ ${
+      document.querySelector(".project-container__list").id
+    }`;
     todoContainer.append(wrapper);
     currentProject.forEach((project, i) => {
       const listItem = document.createElement("li");
-      const title = document.createElement("h3");
+      const title = document.createElement("h4");
       const dueDate = document.createElement("span");
       const priority = document.createElement("p");
-      const checkMark = document.createElement("input");
       title.textContent = project.title;
       dueDate.textContent = project.dueDate;
       priority.textContent = project.priority;
-      checkMark.setAttribute("type", "checkbox");
-      listItem.append(title, dueDate, priority, checkMark);
+      listItem.append(title, dueDate, priority);
       listItem.setAttribute("class", "to-dos__list-item");
       listItem.setAttribute("data-index", i);
       todoContainer.append(listItem);
@@ -69,7 +62,9 @@ const displayManager = (() => {
 const eventListenerManager = (() => {
   const newTodoEventListener = () => {
     const newTodoBtn = document.querySelector(".to-dos__container-btn");
-    newTodoBtn.addEventListener("click", (e) => {
+    newTodoBtn.addEventListener("click", () => {
+      const bodyWrapper = document.querySelector(".wrapper");
+      bodyWrapper.classList.toggle("blur-filter");
       const todoForm = document.querySelector(".to-dos__form");
       todoForm.setAttribute("id", "enabled");
     });
@@ -78,6 +73,9 @@ const eventListenerManager = (() => {
   const newProjectEventListener = () => {
     const newProjectBtn = document.querySelector(".project-container__btn");
     newProjectBtn.addEventListener("click", () => {
+      const bodyWrapper = document.querySelector(".wrapper");
+      console.log(bodyWrapper.classList);
+      bodyWrapper.classList.toggle("blur-filter");
       const projectForm = document.querySelector(".project__form");
       projectForm.setAttribute("id", "enabled");
     });
@@ -86,6 +84,8 @@ const eventListenerManager = (() => {
   const todoFormEventListener = () => {
     const todoForm = document.querySelector(".to-dos__form");
     todoForm.addEventListener("submit", (e) => {
+      const bodyWrapper = document.querySelector(".wrapper");
+      bodyWrapper.classList.remove("blur-filter");
       e.preventDefault();
       domInterface.gatherTodoFormData();
       displayManager.refreshTodos();
@@ -96,6 +96,8 @@ const eventListenerManager = (() => {
     const cancelBtn = document.querySelectorAll(".to-dos__form-cancel");
     cancelBtn.forEach((e) => {
       e.addEventListener("click", (e) => {
+        const bodyWrapper = document.querySelector(".wrapper");
+        bodyWrapper.classList.remove("blur-filter");
         e.target.form.setAttribute("id", "disabled");
         e.target.form.reset();
       });
@@ -105,6 +107,8 @@ const eventListenerManager = (() => {
   const projectFormEventListener = () => {
     const projectForm = document.querySelector(".project__form");
     projectForm.addEventListener("submit", (e) => {
+      const bodyWrapper = document.querySelector(".wrapper");
+      bodyWrapper.classList.remove("blur-filter");
       e.preventDefault();
       domInterface.gatherProjectFormData();
       displayManager.refreshProjects();
@@ -149,7 +153,7 @@ const domInterface = (() => {
     currentProject.pushItem(item);
     resetForm(form);
   };
-  //Gathers the name of the project, creates a project item,
+  //Gathers the name of the project, creates a project item and pushes it to the project storage array.. afterwards it resets the form.
   const gatherProjectFormData = () => {
     const form = document.querySelector(".project__form");
     const name = document.getElementById("projectName");

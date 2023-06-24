@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <style>
-      @import url("https://fonts.googleapis.com/css2?family=Carme&family=Molengo&display=swap");
+      @import url("https://fonts.googleapis.com/css2?family=Hind+Siliguri&family=Red+Hat+Mono:wght@300;400&display=swap");
     </style>
     <script
       src="https://kit.fontawesome.com/d57f01c9bf.js"
@@ -18,32 +18,33 @@
       <header>
         <nav>
           <h1>To-do 📝</h1>
+          <i class="fa-solid fa-bars" id="nav-menu"></i>
         </nav>
       </header>
       <aside class="project-container">
-        <button class="project-container__btn">
+        <div class="project-container__header">
           <span>Projects</span>
-          <i class="fa-solid fa-square-plus"></i>
-        </button>
+          <button class="project-container__btn">+</button>
+        </div>
         <ul class="project-container__list" id="Inbox">
           <!-- Projects -->
-          <li class="project-container__list--item"><h3>Inbox</h3></li>
+          <li class="project-container__list-item"><h3>Inbox</h3></li>
         </ul>
       </aside>
       <main class="to-dos__container">
         <ul class="to-dos__list">
           <!-- todos -->
-          <button class="to-dos__container-btn">
-            <i class="fa-solid fa-square-plus"></i>
-          </button>
-          <li></li>
+          <!-- <button class="to-dos__container-btn">+</button>
+          <li></li> -->
         </ul>
       </main>
     </div>
     <form class="to-dos__form" id="disabled">
       <button type="button" class="to-dos__form-cancel">X</button>
-      <label for="title">Title</label>
-      <input type="text" name="title" id="title" required />
+      <div class="title-wrapper">
+        <label for="title">Title</label>
+        <input type="text" name="title" id="title" required />
+      </div>
       <!-- <label for="description">Description</label>
       <textarea
         name="description"
@@ -52,20 +53,30 @@
         rows="10"
         required
       ></textarea> -->
-      <label for="dueDate">Due Date</label>
-      <input type="date" name="dueDate" id="dueDate" required />
-      <select name="priority" id="priority" required>
-        <option value="Priority" selected disabled required>Priority</option>
-        <option value="Low">Low</option>
-        <option value="Medium">Medium</option>
-        <option value="High">High</option>
-      </select>
+      <div class="dueDate-wrapper">
+        <label for="dueDate">Due Date</label>
+        <input type="date" name="dueDate" id="dueDate" required />
+      </div>
+      <div class="priority-wrapper">
+        <label for="priority">Priority</label>
+        <select name="priority" id="priority" required>
+          <option value="Low">Low</option>
+          <option value="Medium">Medium</option>
+          <option value="High">High</option>
+        </select>
+      </div>
       <input type="submit" value="Submit" id="Submit" />
     </form>
     <form class="project__form" id="disabled">
       <button type="button" class="to-dos__form-cancel">X</button>
       <label for="projectName">Name</label>
-      <input type="text" name="projectName" id="projectName" required />
+      <input
+        type="text"
+        name="projectName"
+        id="projectName"
+        maxlength="40"
+        required
+      />
       <input type="submit" value="Submit" id="projectSubmit" />
     </form>
   </body>

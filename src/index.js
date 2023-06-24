@@ -11,7 +11,6 @@ const projectStorage = [Inbox];
 eventListenerManager.todoFormEventListener();
 eventListenerManager.cancelFormEventListener();
 eventListenerManager.projectFormEventListener();
-eventListenerManager.newTodoEventListener();
 eventListenerManager.newProjectEventListener();
 displayManager.refreshProjects();
 displayManager.refreshTodos();
