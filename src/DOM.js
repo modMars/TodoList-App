@@ -55,6 +55,7 @@ const displayManager = (() => {
       todoContainer.append(listItem);
     });
     eventListenerManager.newTodoEventListener();
+    eventListenerManager.deleteTodoEventListener();
   };
   return { refreshProjects, refreshTodos };
 })();
@@ -115,12 +116,27 @@ const eventListenerManager = (() => {
       displayManager.refreshTodos();
     });
   };
+
+  const deleteTodoEventListener = () => {
+    const toDoItems = document.querySelectorAll(".to-dos__list-item");
+    toDoItems.forEach((item) => {
+      item.addEventListener("click", (e) => {
+        const toDoItem = e.currentTarget.dataset.index;
+        const currentProject = domInterface.getCurrentProject();
+        console.log("Index = ", toDoItem, "content = ", currentProject.content);
+        currentProject.content.splice(toDoItem, 1);
+        displayManager.refreshTodos();
+      });
+    });
+  };
+
   return {
     newTodoEventListener,
     newProjectEventListener,
     todoFormEventListener,
     cancelFormEventListener,
     projectFormEventListener,
+    deleteTodoEventListener,
   };
 })();
 
