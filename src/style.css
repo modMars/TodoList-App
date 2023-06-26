@@ -13,7 +13,7 @@ html {
 
 .wrapper {
   display: grid;
-  grid-template-columns: minmax(100px, 180px) 1fr;
+  grid-template-columns: minmax(120px, 200px) 1fr;
   grid-template-rows: 4vh 96vh;
   transition: all 0.25s ease;
 }
@@ -26,13 +26,18 @@ h1 {
   color: var(--accent);
 }
 
+h4 {
+  font-size: 1.5rem;
+  padding: 0;
+  margin: 0;
+}
+
 header {
   grid-column: 1 / 3;
   grid-row: 1 / 2;
 }
 
 nav {
-  /* background-color: #faf2db; */
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -119,6 +124,7 @@ body {
   position: relative;
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
   margin: 0;
   padding: 0;
   cursor: pointer;
@@ -127,10 +133,28 @@ body {
   font-size: 1.75rem;
   margin-bottom: 20px;
   margin-left: 20px;
+  word-break: break-word;
 }
 
-.project-container__list-item:hover {
+.project-container__list-item > h4 {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 12ch;
+  overflow-wrap: break-word;
+}
+
+.fa-x {
+  position: absolute;
+  font-size: 1rem;
+  align-self: center;
+  left: 85%;
+  visibility: hidden;
+}
+
+.project-container__list-item:hover > .fa-x {
+  background-color: #424a55;
   color: var(--accent);
+  visibility: visible;
 }
 
 .project-container__list-item::before {
@@ -150,32 +174,6 @@ body {
   border-top: solid 3px rgb(22, 22, 29);
   padding: 20px;
 }
-
-/* Todo */
-@media only screen and (max-width: 478px) {
-  .wrapper {
-    grid-template-columns: repeat(1, 1fr);
-    grid-template-rows: 4vh minmax(96vh, 1fr);
-  }
-  .project-container {
-    display: none !important;
-  }
-  .to-dos__container {
-    grid-column: 1/3;
-  }
-  #nav-menu {
-    display: inline;
-  }
-}
-
-/* .project-container__list-item > h3 {
-  display: flex;
-  flex-wrap: wrap;
-  margin: 0;
-  padding: 0;
-  cursor: pointer;
-  width: 100%;
-} */
 
 .project-container__list-item-title:hover {
   color: var(--accent);
@@ -274,23 +272,6 @@ select:focus {
   padding: 5px;
 }
 
-#title,
-#dueDate,
-#priority {
-  min-height: 30px;
-  margin-bottom: 20px;
-  padding: 0;
-}
-
-#dueDate {
-  display: inline;
-  /* width: 100%; */
-}
-#priority {
-  width: 100%;
-  height: 100%;
-}
-
 .to-dos__list {
   display: flex;
   align-items: center;
@@ -321,7 +302,6 @@ select:focus {
   border-radius: 5px;
   text-align: center;
   background-color: #313944;
-  transition: all 1s ease;
 }
 
 .to-dos__list-item:hover {
@@ -384,13 +364,14 @@ select:focus {
   width: fit-content;
   align-self: center;
   justify-self: flex-end;
-  width: 25px;
-  height: 25px;
+  min-width: 25px;
+  min-height: 25px;
   font-size: 1.5rem;
   border-radius: 4px;
   padding: 0;
   border: none;
   text-align: center;
+  margin-left: 50px;
 }
 
 .to-dos__container-btn:hover {
@@ -399,7 +380,7 @@ select:focus {
 
 #to-dos__container-wrapper {
   display: flex;
-  width: 50%;
+  width: 70%;
   justify-content: space-between;
 }
 
@@ -426,4 +407,20 @@ select:focus {
 #disabled {
   visibility: hidden;
   opacity: 0;
+}
+/* Todo */
+@media only screen and (max-width: 478px) {
+  .wrapper {
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: 4vh minmax(96vh, 1fr);
+  }
+  .project-container {
+    display: none !important;
+  }
+  .to-dos__container {
+    grid-column: 1/3;
+  }
+  #nav-menu {
+    display: inline;
+  }
 }

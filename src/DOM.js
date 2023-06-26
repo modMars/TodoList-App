@@ -11,9 +11,13 @@ const displayManager = (() => {
     }
     projectStorage.forEach((e, i) => {
       const newProjectItem = document.createElement("li");
+      const trashIcon = document.createElement("i");
+      const h4 = document.createElement("h4");
+      trashIcon.classList.add("fa-solid", "fa-x");
       newProjectItem.setAttribute("class", "project-container__list-item");
-      newProjectItem.setAttribute("data-index", i);
-      newProjectItem.textContent = e.name;
+      trashIcon.setAttribute("data-index", i);
+      h4.textContent = e.name;
+      newProjectItem.append(h4, trashIcon);
       newProjectItem.addEventListener("click", () => {
         if (projectContainer.id != e.name) {
           projectContainer.setAttribute("id", e.name);
@@ -22,6 +26,7 @@ const displayManager = (() => {
       });
       projectContainer.append(newProjectItem);
     });
+    eventListenerManager.deleteProjectEventListener();
   };
 
   const refreshTodos = () => {
@@ -75,7 +80,6 @@ const eventListenerManager = (() => {
     const newProjectBtn = document.querySelector(".project-container__btn");
     newProjectBtn.addEventListener("click", () => {
       const bodyWrapper = document.querySelector(".wrapper");
-      console.log(bodyWrapper.classList);
       bodyWrapper.classList.toggle("blur-filter");
       const projectForm = document.querySelector(".project__form");
       projectForm.setAttribute("id", "enabled");
@@ -121,11 +125,22 @@ const eventListenerManager = (() => {
     const toDoItems = document.querySelectorAll(".to-dos__list-item");
     toDoItems.forEach((item) => {
       item.addEventListener("click", (e) => {
-        const toDoItem = e.currentTarget.dataset.index;
+        const itemIndex = e.currentTarget.dataset.index;
         const currentProject = domInterface.getCurrentProject();
-        console.log("Index = ", toDoItem, "content = ", currentProject.content);
-        currentProject.content.splice(toDoItem, 1);
+        currentProject.content.splice(itemIndex, 1);
         displayManager.refreshTodos();
+      });
+    });
+  };
+
+  const deleteProjectEventListener = () => {
+    const projectCross = document.querySelectorAll(".fa-x");
+    projectCross.forEach((cross) => {
+      cross.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const index = e.target.dataset.index;
+        projectStorage.splice(index, 1);
+        displayManager.refreshProjects();
       });
     });
   };
@@ -137,6 +152,7 @@ const eventListenerManager = (() => {
     cancelFormEventListener,
     projectFormEventListener,
     deleteTodoEventListener,
+    deleteProjectEventListener,
   };
 })();
 
