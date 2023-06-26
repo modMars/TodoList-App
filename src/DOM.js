@@ -66,6 +66,13 @@ const displayManager = (() => {
 })();
 
 const eventListenerManager = (() => {
+  const focusOnForm = (input) => {
+    setTimeout(() => {
+      input.focus();
+      input.select();
+    }, 100);
+  };
+
   const newTodoEventListener = () => {
     const newTodoBtn = document.querySelector(".to-dos__container-btn");
     newTodoBtn.addEventListener("click", () => {
@@ -73,6 +80,7 @@ const eventListenerManager = (() => {
       bodyWrapper.classList.toggle("blur-filter");
       const todoForm = document.querySelector(".to-dos__form");
       todoForm.setAttribute("id", "enabled");
+      focusOnForm(document.querySelector("#title"));
     });
   };
   //Add new Project functionality
@@ -83,6 +91,8 @@ const eventListenerManager = (() => {
       bodyWrapper.classList.toggle("blur-filter");
       const projectForm = document.querySelector(".project__form");
       projectForm.setAttribute("id", "enabled");
+      //Auto select input.
+      focusOnForm(document.querySelector("#projectName"));
     });
   };
   //Add new Todo functionality
